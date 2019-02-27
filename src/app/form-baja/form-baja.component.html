@@ -1,0 +1,39 @@
+<div class="container alturaMinima col-sm-10 col-md-offset-1 col-xs-12">
+    <div class="row">
+        <div class="container row col-sm-6 col-xs-12">
+            <h1>Formulario de alta:</h1>
+                <input type="text" 
+                placeholder = "Nombre y apellidos"
+                [(ngModel)] = "nombreSeleccionado"  
+                />
+                <br/>
+                <input type="text" 
+                    placeholder = "Tu descripción"
+                    [(ngModel)] = "descripcionIntroducida"
+                    />
+                <br/>
+                <!-- <input type="text" 
+                    placeholder = "Fichero"
+                    [(ngModel)] = "ficheroIntroducido"
+                    />  -->
+                    <input type="file" (change) = "archivoSeleccionado($event)">
+                <br/>
+                <input type="button" value="Limpiar" (click) = "limpiar()"/>
+                <input type="button" value="Añadir" (click) = "darDeAlta()"/>
+        </div>
+
+        <div class="form-group col-md-6 col-xs-12">
+            <h1>Eliminar Proyecto:</h1><br/>
+            <select [(ngModel)] = "nombreSeleccionado" class="form-control selectpicker">
+            <option selected class="texto-form-baja">
+                &lt;Selecciona el proyecto a eliminar&gt;
+            </option>
+            <option *ngFor="let portfolio of arrayPortfolios" class="texto-form-baja">
+                {{ portfolio.nombre }}
+            </option>
+                <!-- {{ portfolio.nombre }} -->
+            </select><br/>
+            <input type="button" value="Dar de baja" (click) = "darBaja()" class="btn btn-danger btn-lg">
+        </div>
+    </div>
+</div>

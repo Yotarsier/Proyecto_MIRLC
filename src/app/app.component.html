@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<title>Gestor de Portfolio</title>
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/Footer-with-button-logo.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- Ver más de NAVBAR con Bootstrap: https://www.w3schools.com/bootstrap/bootstrap_navbar.asp -->
+	<nav class="navbar navbar-inverse">
+		
+		<app-menu>No funciona el menu</app-menu>
+
+	</nav>
+		<div class="container-fixed">
+				<app-form-alta *ngIf="GetVista()==1">No funciona el módulo de alta...</app-form-alta>
+				<app-form-baja *ngIf="GetVista()==2">No funciona el módulo de baja...</app-form-baja>
+				<div *ngIf="GetVista()==0">
+		
+		
+			<!-- <img src="assets/images/hoodh-ahmed-1325762-unsplash.jpg" class="myImg"/> -->
+			<div class="row ImagenInicio alturaMinima">
+					<div class="col-md-6 col-md-offset-3 contenedorBlanco ">
+							<p class="textoContenedor">Bienvenidos a la presentaci&oacute;n del gestor de portfolios del grupo MIRLC: componemos el grupo Ricardo Rold&aacute;n, Marta Gonz&aacute;lez, Christina Rotari,In&eacute;s Redondo y Gwendolin Gonz&aacute;lez.
+							<br/>
+							¡Gracias!
+							</p>
+					</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer (par ver más: https://tutorialzine.com/2016/10/freebie-5-fantastic-bootstrap-footers -->
+	<footer id="myFooter">
+		<div class="container align-middle">
+			<div class="row align-middle">
+				<div class="col-sm-3 align-middle">
+					<h3 class="logo"><a href="#">MIRCL</a></h3>
+				</div>
+				<div class="col-sm-2 align-middle">
+					<ul>
+						<li><a href="#" data-que-mostrar="div_form" (click) = "elegirVista(1)" class="links-menu">Ver Portfolios</a></li>
+						<li><a href="#" data-que-mostrar="div_form" (click) = "elegirVista(2)" class="links-menu">Gestionar Portfolios</a></li>
+					</ul>
+				</div>
+				<div class="align-middle float-right">
+					<button type="button" class="btn btn-default">CONTACTO</button>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright">
+			<p>© 2019 MIRLC </p>
+		</div>
+	</footer>
+
+	<!-- Footer -->
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- <script>
+
+	// Ver más de clases: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Classes
+	class Portfolio {
+
+		constructor(nombre, textoDescripcion, nombreFichero) {
+			// Aquí usamos arguments. Ver más: https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Funciones/arguments
+			if (arguments.length == 3) {
+				this.nombre = nombre;
+				this.descripcion = textoDescripcion;
+				this.fichero = nombreFichero;
+			} else if (arguments.length == 1) {
+				this.nombre = arguments[0].nombre;
+				this.descripcion = arguments[0].descripcion;
+				this.fichero = arguments[0].fichero;
+			} else {
+				// Ver más console: https://developer.mozilla.org/es/docs/Web/API/Console
+				console.error("Sólo se admite 1 ó 3 argumentos en el constructor");
+			}
+		}
+		htmlTabla() {
+			var nombre = this.nombre;
+			var textoDescripcion = this.descripcion;
+			var nombreFichero = this.fichero;
+			// Para ver explicación: http://2ality.com/2015/01/es6-strings.html
+			var htmlTR = `<tr>
+					<td>${nombre}</td>
+					<td>${textoDescripcion}</td>
+					<td><a href=">${nombreFichero}.html">Ver CV</a></td>
+				</tr>`;
+			return htmlTR;
+		}
+	}
+	// Otro artículo sobre clases: https://www.todojs.com/clases-en-ecmascript-2015-es6/
+	class ListaPortfolios {
+		constructor() {
+			if (typeof (Storage) === "undefined") {
+				// Sorry! No Web Storage support..
+				alert("No se pueden guardar los datos");
+			} else {
+				// para ver el uso del almacenatmiento local: https://www.w3schools.com/HTML/html5_webstorage.asp
+				this.ls = window.localStorage;
+				this.posActual = 0;
+				if (this.ls.getItem("portfolios") == null) {
+					this.array = [];
+					this.guardarEnLocalStorage();
+				}
+				else {
+					this.cargarDesdeLocalStorage();
+				}
+			}
+		}
+		alta(nombre, descripcion, fichero) {
+			var nuevoPortfolio = new Portfolio(nombre, descripcion, fichero);
+			this.array.push(nuevoPortfolio);
+			this.guardarEnLocalStorage();
+		}
+		eliminar(nombre) {
+			// Ver uso de método splice: https://www.w3schools.com/jsref/jsref_splice.asp
+			for (var i = 0; i < this.array.length; i++) {
+				if (this.array[i].nombre == nombre) {
+					this.array.splice(i, 1);
+				}
+			}
+			this.guardarEnLocalStorage();
+		}
+		cargarDesdeLocalStorage() {
+			// para ver el uso del almacenatmiento local: https://www.w3schools.com/HTML/html5_webstorage.asp
+			var arrayEnTexto = this.ls.getItem("portfolios");
+			this.array = JSON.parse(arrayEnTexto);
+			// Este array lo convertimos en un array de obj Portfolio
+			for (var i = 0; i < this.array.length; i++) {
+				this.array[i] = new Portfolio(this.array[i]);
+			}
+		}
+		guardarEnLocalStorage() {
+			var arrayEnTexto = JSON.stringify(this.array);
+			this.ls.setItem("portfolios", arrayEnTexto);
+		}
+		htmlTabla() {
+			var htmlTbody = "";
+			// Otra manera de recorrer array: https://hacks.mozilla.org/2015/04/es6-in-depth-iterators-and-the-for-of-loop/
+			for (var htmlTR of this.array) {
+				htmlTbody += htmlTR.htmlTabla();
+			}
+			return htmlTbody;
+		}
+		anterior() {
+			this.posActual--;
+			if (this.posActual < 0)
+				this.posActual = 0;
+			return this.posActual;
+		}
+		siguiente() {
+			this.posActual++;
+			if (this.posActual >= this.array.length)
+				this.posActual = this.array.length - 1;
+			return this.posActual;
+		}
+		buscar(palabra) {
+			for (var i = 0; i < this.array.length; i++) {
+				if (this.array[i].descripcion.toLowerCase().indexOf(palabra.toLowerCase()) >= 0) {
+					this.posActual = i;
+				}
+			}
+			return this.posActual;
+		}
+	}
+	var portfolios;
+
+	// Otra manera de crear funciones: ver más en https://www.w3schools.com/js/js_function_definition.asp
+	var funcionActualizarTabla = function () {
+		$("#tbody_lista_cvs").html(portfolios.htmlTabla());
+	}
+	function inicializar() {
+		portfolios = new ListaPortfolios();
+		$("#div_presentacion").show(1000);
+		$("#altaPortfolio").click(function () {
+			var nom = $("#nombre").val();
+			var desc = $("#descripcion").val();
+			var fich = $("#nombre_fichero").val();
+			portfolios.alta(nom, desc, fich);
+			funcionActualizarTabla();
+		});
+		$("#eliminarPortfolio").click(function () {
+			var nom = $("#nombre").val();
+			portfolios.eliminar(nom);
+			funcionActualizarTabla();
+		});
+		funcionActualizarTabla();
+		$("#ver_presentacion,#ver_alta,#ver_listado,#ver_1_en_1").click(function () {
+			// Ver data de HTML5 y cómo usarlo con jQuery: https://api.jquery.com/data/
+			var idDIV = $(this).data("que-mostrar");
+			mostrarDIV_Y_ocultarResto(idDIV);
+		});
+		$("[id='btnAnterior']").click(function () {
+			// Ver más de animaciones jQUery: https://www.w3schools.com/jquery/jquery_animate.asp
+			// y en http://api.jquery.com/animate/
+			$("#div_cv").animate(
+				{ width: 'hide' }, "slow",
+				function () {
+					mostrarCV(portfolios.anterior());
+					$("#div_cv").animate({ width: 'show' }, "slow");
+				});
+		});
+		$("[id='btnSiguiente']").click(function () {
+			$("#div_cv").animate(
+				{ width: 'hide' }, "slow",
+				function () {
+					mostrarCV(portfolios.siguiente());
+					$("#div_cv").animate({ width: 'show' }, "slow");
+				});
+		});
+		$("#btnBuscar").click(function() {
+			mostrarDIV_Y_ocultarResto("div_de_1_en_1");
+			$("#div_cv").animate(
+				{ width: 'hide' }, "slow",
+				function () {
+					mostrarCV(portfolios.buscar($("#texto_busqueda").val()));
+					$("#div_cv").animate({ width: 'show' }, "slow");
+				});
+		});
+		mostrarCV(portfolios.posActual);
+	}
+	var mostrarDIV_Y_ocultarResto = function (id) {
+    alert("Mostrar");
+		$("#div_presentacion").hide(1000);
+		$("#div_form").hide(1000);
+		$("#div_listado").hide(1000);
+		$("#div_de_1_en_1").hide(1000);
+		$(`#${id}`).show(1000);
+	}
+	var mostrarCV = function (index) {
+		var portfolio = portfolios.array[index];
+		// texto_nombre img_foto texto_descripcion enlace_cv
+		$("#texto_nombre").html(portfolio.nombre);
+		$("#img_foto").attr("src", `images/${portfolio.fichero}.jpg`);
+		$("#texto_descripcion").html(portfolio.descripcion);
+		$("#enlace_cv").attr("href", `CVs/${portfolio.fichero}.html`);
+	}
+	var buscarCV = function(index) {
+		
+		var portfolio = portfolios.array[index];
+	}
+	$(document).ready(inicializar);
+</script> -->
+
+</html>

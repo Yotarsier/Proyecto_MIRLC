@@ -1,0 +1,19 @@
+*{
+    padding: 0px;
+}
+.texto-form-baja, .form-control {
+    font-size: 16px;
+}
+
+select {
+    max-width: 800px;
+}
+
+.form-group {
+    padding-left: 0px;
+}
+
+.alturaMinima
+{
+  min-height: 450px;
+}

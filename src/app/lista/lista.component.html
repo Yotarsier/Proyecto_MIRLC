@@ -1,0 +1,27 @@
+<h2>Lista de portfolios</h2>
+<br/>
+<div class="alturaMinima">
+  <table class="table table-striped table-bordered table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Enlace</th>
+      </tr>
+    </thead>
+    <tbody id="tbody_lista_cvs">
+      <tr *ngFor="let portfolio of arrayPortfolios">
+        <td>{{ portfolio.nombre }}</td>
+        <td>{{ portfolio.descripcion }}</td>
+        <td>
+          
+          
+          <div *ngIf="portfolio.fichero != null">
+              <a href="files/{{ portfolio.fichero }}">Ver fichero</a>
+              <!-- <button>Ver fichero</button> -->
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

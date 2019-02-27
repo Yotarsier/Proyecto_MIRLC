@@ -1,0 +1,46 @@
+#div_presentacion,
+#div_form,
+#div_listado,
+#div_de_1_en_1 {
+  display: none;
+}
+    
+.ImagenInicio {
+  background-image: url(assets/images/hoodh-ahmed-1325762-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 0%;
+  margin: 0%;
+  opacity: 0.8;
+}
+
+.alturaMinima {  
+  min-height: 500px;
+}
+
+.contenedorBlanco{
+  position: absolute;
+  background-color: white;
+  opacity: 1 !important;
+  padding-top: 2.5em;
+  padding-right: 4.5em;
+  padding-left: 4.5em;
+  padding-bottom: 2.5em;
+  margin-top: 11em;
+  background: linear-gradient(to right, rgba(255,255,255,0) , white, white, white, white, white, rgba(255,255,255,0)); /* Standard syntax */			
+}
+
+.textoContenedor {
+  font-family: 'Lato', sans-serif;
+  color: black;
+  font-size: 1.3em;
+  text-align: center;
+  opacity: 1 !important;
+}
+
+.navbar {
+  margin-bottom: 0% !important;
+} 
